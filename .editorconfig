@@ -1,0 +1,6 @@
+root = true
+
+[*]
+tab_width=4
+max_line_length=120
+bracket_same_line=true
