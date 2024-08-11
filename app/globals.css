@@ -9,7 +9,7 @@
 }
 
 h1 {
-    @apply text-[48px] font-medium leading-tight;
+    @apply lg:text-[48px] text-[42px] font-medium leading-tight;
 }
 
 h2 {
@@ -34,4 +34,8 @@ h5 {
 
 .text-regular {
     @apply text-[16px] tracking-wide;
+}
+
+.text-small {
+    @apply text-[13px] font-light tracking-wide;
 }

@@ -7,6 +7,7 @@ import CloseImage from "@/public/close.svg";
 import CallImage from "@/public/call_fill.svg";
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
 
 const menuItems = [
     {
@@ -30,7 +31,9 @@ const menuItems = [
 const MenuItem = ({ name, link }) => {
     return (
         <div className="uppercase py-3 hover:bg-secondary">
-            <p>{name}</p>
+            <Link href={link}>
+                <p>{name}</p>
+            </Link>
         </div>
     );
 };
@@ -70,34 +73,37 @@ const HamburgerMenuButton = () => {
 
 const NavbarLarge = () => {
     return (
-        <div className="w-full h-[124px] flex flex-row items-center justify-between color-primary text-[16px] font-medium">
+        <nav className="w-full h-[124px] flex flex-row items-center justify-between color-primary text-[16px] font-medium">
             <div className="flex flex-row gap-16 items-center">
                 <Logo />
                 <div className="flex flex-row gap-14 uppercase">
                     {menuItems.map((item, index) => (
-                        <p key={index}>{item.name}</p>
+                        <Link href={item.link}>
+                            {" "}
+                            <p key={index}>{item.name}</p>
+                        </Link>
                     ))}
                 </div>
             </div>
             <div>
                 <p className="font-semibold ">{Constant.contactPhoneNumber}</p>
             </div>
-        </div>
+        </nav>
     );
 };
 
 const NavbarSmall = () => {
     return (
-        <div className="w-full h-[124px] flex flex-row items-center justify-between color-primary text-[16px] font-medium relative">
+        <nav className="w-full h-[124px] flex flex-row items-center justify-between color-primary text-[16px] font-medium relative">
             <Logo />
             <HamburgerMenuButton />
-        </div>
+        </nav>
     );
 };
 
 export default function Navbar() {
     return (
-        <div>
+        <div className="container">
             <div className="hidden lg:block">
                 <NavbarLarge />
             </div>
