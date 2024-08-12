@@ -15,11 +15,7 @@ const menuItems = [
         link: "/windows",
     },
     {
-        name: "Двери",
-        link: "/doors",
-    },
-    {
-        name: "Порталы",
+        name: "Двери и порталы",
         link: "/doors",
     },
     {
@@ -40,7 +36,7 @@ const MenuItem = ({ name, link }) => {
 
 const Menu = () => {
     return (
-        <div className="py-4 absolute left-0 w-full bg-background z-10">
+        <div className="w-full bg-background z-10">
             <div className="flex flex-col gap-0 divide-y divide-secondary border-b border-secondary">
                 {menuItems.map((item, index) => (
                     <MenuItem key={index} name={item.name} link={item.link} />
@@ -54,20 +50,11 @@ const Menu = () => {
     );
 };
 
-const HamburgerMenuButton = () => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const handleClick = () => {
-        setIsOpen(!isOpen);
-    };
-
+const HamburgerMenuButton = ({ onClick, isOpen }) => {
     return (
-        <div>
-            <button onClick={handleClick}>
-                <Image src={isOpen ? CloseImage : MenuImage} alt="menu" width={24} height={24} />
-            </button>
-            {isOpen && <Menu />}
-        </div>
+        <button onClick={onClick}>
+            <Image src={isOpen ? CloseImage : MenuImage} alt="menu" width={24} height={24} />
+        </button>
     );
 };
 
@@ -78,9 +65,8 @@ const NavbarLarge = () => {
                 <Logo />
                 <div className="flex flex-row gap-14 uppercase">
                     {menuItems.map((item, index) => (
-                        <Link href={item.link}>
-                            {" "}
-                            <p key={index}>{item.name}</p>
+                        <Link key={index} href={item.link}>
+                            <p>{item.name}</p>
                         </Link>
                     ))}
                 </div>
@@ -93,11 +79,20 @@ const NavbarLarge = () => {
 };
 
 const NavbarSmall = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleClick = () => {
+        setIsOpen(!isOpen);
+    };
+
     return (
-        <nav className="w-full h-[124px] flex flex-row items-center justify-between color-primary text-[16px] font-medium relative">
-            <Logo />
-            <HamburgerMenuButton />
-        </nav>
+        <div className="">
+            <nav className="h-24 flex flex-row items-center justify-between color-primary text-[16px] font-medium">
+                <Logo />
+                <HamburgerMenuButton isOpen={isOpen} onClick={handleClick} />
+            </nav>
+            {isOpen && <Menu />}
+        </div>
     );
 };
 
@@ -107,7 +102,7 @@ export default function Navbar() {
             <div className="hidden lg:block">
                 <NavbarLarge />
             </div>
-            <div className="block lg:hidden">
+            <div className="block lg:hidden mb-4">
                 <NavbarSmall />
             </div>
         </div>

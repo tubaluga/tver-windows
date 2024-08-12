@@ -27,7 +27,7 @@ const QuestionModel = [
 
 const QuestionItem = ({ question, answer }) => {
     return (
-        <div className="flex flex-col divide-y divide-secondary-600 lg:col-span-6 py-8">
+        <div className="flex flex-col divide-y divide-secondary-600 lg:col-span-6 lg:py-8 py-4">
             <h4 className="text-primary pb-4">{question}</h4>
             <p className="text-secondary-700 pt-4">{answer}</p>
         </div>
@@ -42,7 +42,7 @@ const QuestionSection = () => {
                 <p className="text-secondary-700 pt-6 lg:text-center">
                     {"Ознакомьтесь с самыми популярными вопросами наших клиентов"}
                 </p>
-                <div className="pt-12 grid lg:grid-cols-12 gap-x-10">
+                <div className="lg:pt-12 pt-6 grid lg:grid-cols-12 gap-x-10">
                     {QuestionModel.map((item, index) => (
                         <QuestionItem key={index} question={item.question} answer={item.answer} />
                     ))}
