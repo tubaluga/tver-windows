@@ -15,6 +15,7 @@ import BalconyGaleryImage2 from "@/public/landing/balcony-g-2.png";
 import BalconyGaleryImage3 from "@/public/landing/balcony-g-3.png";
 import Button from "../../button/button";
 import { useRouter } from "next/navigation";
+import useEmblaCarousel from "embla-carousel-react";
 
 const ProductImage = ({ image }) => {
     return (
@@ -47,11 +48,15 @@ const Description = ({ header, text, second_text, superheader, href }) => {
 };
 
 const PhotoGalery = ({ images }) => {
+    const [emlaRef] = useEmblaCarousel({ align: "start" });
+
     return (
-        <div className="flex flex-row justify-between gap-10 overflow-auto ">
-            {images.map((image, index) => (
-                <Image key={index} src={image} alt="image" width={399} height={386} />
-            ))}
+        <div className="overflow-hidden" ref={emlaRef}>
+            <div className="flex gap-10">
+                {images.map((image, index) => (
+                    <Image key={index} src={image} alt="image" width={399} height={386} />
+                ))}
+            </div>
         </div>
     );
 };
